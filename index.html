@@ -2,39 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Understanding Mood — Clint Cearley</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@300;400;500&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understanding Mood — Visual Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0e10;
-    --surface: #16161a;
-    --border: #2a2a30;
-
-    --pos-hue: 38;
-    --neu-hue: 210;
-    --neg-hue: 0;
-
-    --pos: hsl(38, 80%, 55%);
-    --pos-dim: hsl(38, 40%, 22%);
-    --pos-glow: hsla(38, 80%, 55%, 0.15);
-
-    --neu: hsl(210, 50%, 55%);
-    --neu-dim: hsl(210, 30%, 20%);
-    --neu-glow: hsla(210, 50%, 55%, 0.15);
-
-    --neg: hsl(0, 65%, 48%);
-    --neg-dim: hsl(0, 40%, 18%);
-    --neg-glow: hsla(0, 65%, 48%, 0.15);
-
-    --text: #e8e4dc;
-    --muted: #7a7870;
-    --mono: 'DM Mono', monospace;
-    --serif: 'Crimson Pro', Georgia, serif;
-    --display: 'Playfair Display', Georgia, serif;
-
-    --radius: 12px;
-    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --ink: #1a1610;
+    --paper: #f5f0e8;
+    --paper-dark: #ede7d5;
+    --accent: #b5471b;
+    --accent-cool: #1b5cb5;
+    --gold: #c4922a;
+    --muted: #7a7060;
+    --rule: #c8bfa8;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -42,837 +22,847 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--serif);
-    font-size: 17px;
-    line-height: 1.65;
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.7;
   }
 
-  /* ── HEADER ── */
-  header {
-    position: relative;
-    padding: 60px 32px 48px;
-    text-align: center;
-    overflow: hidden;
-    border-bottom: 1px solid var(--border);
-  }
-
-  header::before {
+  /* NOISE TEXTURE */
+  body::before {
     content: '';
-    position: absolute;
+    position: fixed;
     inset: 0;
-    background:
-      radial-gradient(ellipse 60% 80% at 20% 50%, hsla(38,70%,40%,0.08) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 80% at 80% 50%, hsla(210,60%,40%,0.08) 0%, transparent 70%);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* SIDEBAR NAV */
+  nav {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 200px;
+    background: var(--ink);
+    padding: 48px 0 32px;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    border-right: 2px solid var(--accent);
+  }
+
+  nav .nav-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 0 24px 24px;
+    border-bottom: 1px solid #3a3020;
+    margin-bottom: 20px;
+  }
+
+  nav a {
+    display: block;
+    padding: 7px 24px;
+    color: #b8a88a;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+
+  nav a:hover {
+    color: var(--paper);
+    border-left-color: var(--accent);
+    background: rgba(181,71,27,0.1);
+  }
+
+  nav .nav-section {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #5a5040;
+    padding: 16px 24px 4px;
+  }
+
+  /* MAIN */
+  main {
+    margin-left: 200px;
+    padding: 64px 72px 120px;
+    max-width: 1000px;
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 3px double var(--rule);
+    padding-bottom: 40px;
+    margin-bottom: 64px;
+    animation: fadeUp 0.6s ease both;
   }
 
   .header-eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.25em;
+    font-size: 10px;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--muted);
     margin-bottom: 16px;
   }
 
-  h1 {
-    font-family: var(--display);
-    font-size: clamp(36px, 7vw, 64px);
-    font-weight: 900;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    margin-bottom: 12px;
-  }
-
-  h1 em {
-    font-style: italic;
-    color: var(--pos);
-  }
-
-  .header-sub {
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--muted);
-    font-size: 16px;
-    margin-bottom: 40px;
-  }
-
-  /* ── FRAMEWORK STRIP ── */
-  .framework {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    flex-wrap: wrap;
-    padding: 0 32px;
-  }
-
-  .metric-pill {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    padding: 14px 24px;
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    background: var(--surface);
-  }
-
-  .metric-pill .label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .metric-pill .value {
-    font-family: var(--display);
-    font-size: 13px;
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5vw, 72px);
     font-weight: 700;
-    color: var(--text);
-  }
-
-  /* ── SECTION HEADERS ── */
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 48px 32px 24px;
-  }
-
-  .section-header h2 {
-    font-family: var(--display);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  .section-header .line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  .section-header.pos h2 { color: var(--pos); }
-  .section-header.pos .dot { background: var(--pos); }
-  .section-header.neu h2 { color: var(--neu); }
-  .section-header.neu .dot { background: var(--neu); }
-  .section-header.neg h2 { color: var(--neg); }
-  .section-header.neg .dot { background: var(--neg); }
-
-  .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  /* ── GRID ── */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px;
-    padding: 0 32px 16px;
-  }
-
-  /* ── MOOD CARD ── */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-    overflow: hidden;
-    position: relative;
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity var(--transition);
-    pointer-events: none;
-    border-radius: var(--radius);
-  }
-
-  .card.pos::before { background: var(--pos-glow); }
-  .card.neu::before { background: var(--neu-glow); }
-  .card.neg::before { background: var(--neg-glow); }
-
-  .card:hover { transform: translateY(-3px); }
-  .card:hover::before { opacity: 1; }
-  .card.pos:hover { box-shadow: 0 12px 40px hsla(38,80%,40%,0.2); border-color: hsla(38,80%,55%,0.4); }
-  .card.neu:hover { box-shadow: 0 12px 40px hsla(210,50%,40%,0.2); border-color: hsla(210,50%,55%,0.4); }
-  .card.neg:hover { box-shadow: 0 12px 40px hsla(0,65%,35%,0.25); border-color: hsla(0,65%,48%,0.4); }
-
-  .card-header {
-    padding: 20px 22px 16px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 12px;
-  }
-
-  .mood-name {
-    font-family: var(--display);
-    font-size: 22px;
-    font-weight: 900;
-    letter-spacing: -0.01em;
     line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
   }
 
-  .card.pos .mood-name { color: var(--pos); }
-  .card.neu .mood-name { color: var(--neu); }
-  .card.neg .mood-name { color: var(--neg); }
-
-  .expand-icon {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: transform var(--transition), background var(--transition);
-    margin-top: 2px;
+  header h1 em {
+    font-style: italic;
+    color: var(--accent);
   }
 
-  .card.open .expand-icon { transform: rotate(45deg); }
-  .card.pos.open .expand-icon { background: var(--pos-dim); }
-  .card.neu.open .expand-icon { background: var(--neu-dim); }
-  .card.neg.open .expand-icon { background: var(--neg-dim); }
-
-  .expand-icon svg { width: 12px; height: 12px; stroke: var(--muted); fill: none; stroke-width: 2; }
-
-  .card-tagline {
-    font-family: var(--mono);
+  .header-meta {
+    margin-top: 20px;
     font-size: 11px;
     color: var(--muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
-  /* ── METRIC BARS ── */
-  .metrics {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    padding: 14px 22px;
-    border-bottom: 1px solid var(--border);
+  /* SECTIONS */
+  section {
+    margin-bottom: 80px;
+    animation: fadeUp 0.6s ease both;
   }
 
-  .metric-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  section:nth-child(2) { animation-delay: 0.1s; }
+  section:nth-child(3) { animation-delay: 0.15s; }
+  section:nth-child(4) { animation-delay: 0.2s; }
+  section:nth-child(5) { animation-delay: 0.25s; }
+  section:nth-child(6) { animation-delay: 0.3s; }
 
-  .metric-label {
-    font-family: var(--mono);
+  .section-label {
     font-size: 9px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--muted);
-    width: 72px;
-    flex-shrink: 0;
-  }
-
-  .bar-track {
-    flex: 1;
-    height: 4px;
-    background: var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .bar-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .card.pos .bar-fill { background: var(--pos); }
-  .card.neu .bar-fill { background: var(--neu); }
-  .card.neg .bar-fill { background: var(--neg); }
-
-  .metric-val {
-    font-family: var(--mono);
-    font-size: 9px;
-    color: var(--muted);
-    width: 28px;
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  /* ── EXPANDABLE BODY ── */
-  .card-body {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .card.open .card-body {
-    grid-template-rows: 1fr;
-  }
-
-  .card-body-inner {
-    overflow: hidden;
-  }
-
-  .card-sections {
-    padding: 18px 22px 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  .info-section h4 {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    color: var(--accent);
     margin-bottom: 8px;
   }
 
-  .card.pos .info-section h4 { color: var(--pos); }
-  .card.neu .info-section h4 { color: var(--neu); }
-  .card.neg .info-section h4 { color: var(--neg); }
-
-  .info-section p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #c0bbb2;
-    font-family: var(--serif);
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
   }
 
-  .tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    margin: 32px 0 12px;
   }
 
-  .tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 4px 10px;
-    border-radius: 100px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    letter-spacing: 0.06em;
-  }
+  p { margin-bottom: 16px; color: #3a3020; }
 
-  .card.pos .tag { border-color: hsla(38,80%,55%,0.25); color: hsl(38,60%,65%); }
-  .card.neu .tag { border-color: hsla(210,50%,55%,0.25); color: hsl(210,50%,70%); }
-  .card.neg .tag { border-color: hsla(0,65%,48%,0.25); color: hsl(0,55%,65%); }
-
-  .rule-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .rule-list li {
-    font-size: 13.5px;
-    color: #b8b3aa;
-    font-family: var(--serif);
-    padding-left: 14px;
-    position: relative;
-    line-height: 1.5;
-  }
-
-  .rule-list li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--muted);
-    font-size: 11px;
-  }
-
-  /* ── LEGEND ── */
-  .legend {
-    margin: 0 32px 48px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
+  /* METRIC FRAMEWORK */
+  .metric-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin: 32px 0;
+    background: var(--rule);
+    border: 1px solid var(--rule);
   }
 
-  .legend-item h5 {
-    font-family: var(--mono);
+  .metric-card {
+    background: var(--paper);
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .metric-card .metric-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .metric-card .metric-range {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .metric-card .metric-example {
+    margin-top: 10px;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* BIG 15 MOODS */
+  .mood-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 24px 0;
+  }
+
+  .mood-col-header {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    padding: 12px;
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--muted);
+  }
+
+  .mood-col-header.positive { background: #2a4a1a; }
+  .mood-col-header.neutral { background: #2a2a3a; }
+  .mood-col-header.negative { background: #4a1a1a; }
+
+  .mood-item {
+    background: var(--paper);
+    padding: 12px 16px;
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    cursor: default;
+    transition: background 0.15s;
+    border-left: 3px solid transparent;
+  }
+
+  .mood-item:hover { background: var(--paper-dark); }
+  .mood-item.positive:hover { border-left-color: #4a8a2a; }
+  .mood-item.neutral:hover { border-left-color: #4a4a8a; }
+  .mood-item.negative:hover { border-left-color: var(--accent); }
+
+  /* LIGHTING PRINCIPLES */
+  .principle-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 24px 0;
+  }
+
+  .principle-item {
+    background: var(--paper-dark);
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .principle-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.4;
+  }
+
+  .principle-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
     margin-bottom: 6px;
   }
 
-  .legend-item p {
-    font-size: 13px;
-    color: #a09b93;
-    font-family: var(--serif);
-    line-height: 1.5;
+  /* TABLES */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 12px;
   }
 
-  /* ── WORKFLOW ── */
-  .workflow {
-    margin: 0 32px 48px;
-    padding: 24px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface);
-  }
-
-  .workflow h3 {
-    font-family: var(--mono);
-    font-size: 10px;
+  .data-table th {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 9px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 16px;
+    font-weight: 400;
   }
 
-  .steps {
+  .data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  .data-table tr:nth-child(even) td { background: var(--paper-dark); }
+  .data-table tr:hover td { background: #e8e0cc; }
+
+  .data-table td:first-child {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* COLOR SWATCHES */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 2px;
+    margin: 24px 0;
+    background: var(--rule);
+  }
+
+  .color-swatch {
+    padding: 16px 12px 12px;
     display: flex;
-    align-items: center;
-    gap: 0;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 6px;
+    cursor: default;
+    transition: transform 0.15s;
+  }
+
+  .color-swatch:hover { transform: scale(1.03); position: relative; z-index: 1; }
+
+  .swatch-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,0.1);
+  }
+
+  .swatch-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .swatch-desc {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* COLOR SCHEMES */
+  .scheme-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--rule);
+    margin: 24px 0;
+  }
+
+  .scheme-card {
+    background: var(--paper);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
     gap: 8px;
   }
 
-  .step {
+  .scheme-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .scheme-quality {
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  /* COMPOSITION VISUAL */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--rule);
+    margin: 24px 0;
+  }
+
+  .comp-card {
+    background: var(--paper);
+    padding: 20px 20px 16px;
+  }
+
+  .comp-card .comp-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .comp-card p {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  /* SHOT DISTANCE */
+  .shot-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 24px 0;
+  }
+
+  .shot-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    background: var(--paper-dark);
+    overflow: hidden;
+  }
+
+  .shot-label {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 16px;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-style: italic;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-family: var(--serif);
+  }
+
+  .shot-desc {
+    padding: 12px 16px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* PRINCIPLES */
+  .principle-rules {
+    counter-reset: rule;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 24px 0;
+  }
+
+  .rule-item {
+    background: var(--paper-dark);
+    padding: 18px 24px 18px 64px;
+    position: relative;
     font-size: 13px;
-    color: #c0bbb2;
+    color: #3a3020;
   }
 
-  .step-num {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--pos);
-    background: var(--pos-dim);
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+  .rule-item::before {
+    counter-increment: rule;
+    content: counter(rule);
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--rule);
   }
 
-  .arrow {
+  .rule-item strong {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 15px;
+  }
+
+  /* WORKFLOW BOX */
+  .workflow-box {
+    border: 2px solid var(--ink);
+    padding: 28px 32px;
+    margin: 24px 0;
+    position: relative;
+    background: var(--paper-dark);
+  }
+
+  .workflow-box::before {
+    content: 'WORKFLOW';
+    position: absolute;
+    top: -9px;
+    left: 20px;
+    background: var(--paper-dark);
+    padding: 0 8px;
+    font-size: 9px;
+    letter-spacing: 0.3em;
     color: var(--muted);
-    font-size: 16px;
   }
 
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 24px 32px;
+  .workflow-steps {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .workflow-step {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  .workflow-arrow {
+    color: var(--accent);
+    font-size: 18px;
+  }
+
+  /* DIVIDER */
+  .ornament {
     text-align: center;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
+    color: var(--rule);
+    margin: 48px 0;
+    font-size: 20px;
+    letter-spacing: 0.5em;
   }
 
-  /* ── ANIMATIONS ── */
+  /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .card { animation: fadeUp 0.5s ease both; }
-  .card:nth-child(1) { animation-delay: 0.05s; }
-  .card:nth-child(2) { animation-delay: 0.10s; }
-  .card:nth-child(3) { animation-delay: 0.15s; }
-  .card:nth-child(4) { animation-delay: 0.20s; }
-  .card:nth-child(5) { animation-delay: 0.25s; }
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--paper-dark); }
+  ::-webkit-scrollbar-thumb { background: var(--rule); }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
-    .grid { grid-template-columns: 1fr; padding: 0 16px 16px; }
-    .section-header { padding: 40px 16px 20px; }
-    header { padding: 40px 16px 36px; }
-    .framework { gap: 12px; padding: 0 16px; }
-    .legend, .workflow { margin: 0 16px 32px; }
-  }
-
-  @media (min-width: 1024px) {
-    .grid { grid-template-columns: repeat(3, 1fr); }
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { display: none; }
+    main { margin-left: 0; padding: 40px 24px 80px; }
+    .mood-grid, .scheme-grid { grid-template-columns: 1fr 1fr; }
+    .comp-grid { grid-template-columns: 1fr; }
+    .shot-item { grid-template-columns: 1fr; }
+    .shot-label { padding: 10px 16px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ══ HEADER ══ -->
-<header>
-  <p class="header-eyebrow">Clint Cearley · Swatches · Field Reference</p>
-  <h1>Understanding <em>Mood</em></h1>
-  <p class="header-sub">Lighting · Color · Composition — mapped by Emotion, Energy & Visibility</p>
-  <div class="framework">
-    <div class="metric-pill">
-      <span class="label">Emotion</span>
-      <span class="value">Positive · Neutral · Negative</span>
+<nav>
+  <div class="nav-title">Mood Guide</div>
+  <div class="nav-section">Overview</div>
+  <a href="#framework">The Framework</a>
+  <a href="#moods">Big 15 Moods</a>
+  <div class="nav-section">Aspects</div>
+  <a href="#lighting">Lighting</a>
+  <a href="#color">Color</a>
+  <a href="#composition">Composition</a>
+  <div class="nav-section">Reference</div>
+  <a href="#principles">Key Principles</a>
+</nav>
+
+<main>
+
+  <header>
+    <div class="header-eyebrow">Clint Cearley / Swatches</div>
+    <h1>Understanding<br><em>Mood</em></h1>
+    <div class="header-meta">A visual artist's reference guide — Lighting · Color · Composition</div>
+  </header>
+
+  <!-- FRAMEWORK -->
+  <section id="framework">
+    <div class="section-label">§ 01</div>
+    <h2>The Framework</h2>
+    <p>Every non-informational artwork has a mood. Mood is defined across three quantifiable metrics. Map these first — then use the three Aspects to match them visually.</p>
+
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-name">Emotion</div>
+        <div class="metric-range">Positive → Neutral → Negative</div>
+        <div class="metric-example">Cheerful · Mysterious · Horror</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Energy</div>
+        <div class="metric-range">High → Low</div>
+        <div class="metric-example">Dynamic is high · Peaceful is low</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Visibility</div>
+        <div class="metric-range">Certainty → Uncertainty</div>
+        <div class="metric-example">Bleak = all visible · Ominous = obscured</div>
+      </div>
     </div>
-    <div class="metric-pill">
-      <span class="label">Energy</span>
-      <span class="value">High ←——→ Low</span>
+
+    <div class="workflow-box">
+      <div class="workflow-steps">
+        <span class="workflow-step">Decide mood</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Plot its metrics</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Apply Lighting</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Apply Color</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step">Apply Composition</span>
+      </div>
     </div>
-    <div class="metric-pill">
-      <span class="label">Visibility</span>
-      <span class="value">Certain · Uncertain</span>
+  </section>
+
+  <div class="ornament">— ✦ —</div>
+
+  <!-- BIG 15 -->
+  <section id="moods">
+    <div class="section-label">§ 02</div>
+    <h2>The Big 15 Moods</h2>
+
+    <div class="mood-grid">
+      <div class="mood-col-header positive">Positive</div>
+      <div class="mood-col-header neutral">Neutral</div>
+      <div class="mood-col-header negative">Negative</div>
+
+      <div class="mood-item positive">Peaceful</div>
+      <div class="mood-item neutral">Noir</div>
+      <div class="mood-item negative">Bleak</div>
+
+      <div class="mood-item positive">Magical</div>
+      <div class="mood-item neutral">Mysterious</div>
+      <div class="mood-item negative">Ominous</div>
+
+      <div class="mood-item positive">Cheerful</div>
+      <div class="mood-item neutral">Surreal</div>
+      <div class="mood-item negative">Horror</div>
+
+      <div class="mood-item positive">Dynamic</div>
+      <div class="mood-item neutral">Dramatic</div>
+      <div class="mood-item negative">Gritty</div>
+
+      <div class="mood-item positive">Epic</div>
+      <div class="mood-item neutral">Cool</div>
+      <div class="mood-item negative">Oppressive</div>
     </div>
-  </div>
-</header>
+  </section>
 
-<!-- ══ WORKFLOW ══ -->
-<div class="section-header pos">
-  <div class="dot"></div>
-  <h2>The Process</h2>
-  <div class="line"></div>
-</div>
-<div class="workflow">
-  <h3>How to apply mood intentionally</h3>
-  <div class="steps">
-    <div class="step"><span class="step-num">1</span> Decide desired mood</div>
-    <span class="arrow">→</span>
-    <div class="step"><span class="step-num">2</span> Plot Emotion / Energy / Visibility</div>
-    <span class="arrow">→</span>
-    <div class="step"><span class="step-num">3</span> Consult Aspects (Lighting, Color, Composition)</div>
-    <span class="arrow">→</span>
-    <div class="step"><span class="step-num">4</span> Align all three visually</div>
-  </div>
-</div>
+  <div class="ornament">— ✦ —</div>
 
-<!-- ══ LEGEND ══ -->
-<div class="legend">
-  <div class="legend-item">
-    <h5>Emotion axis</h5>
-    <p>Does this mood feel good, bad, or uncertain? Cheerful = positive. Horror = negative. Mysterious = neutral.</p>
-  </div>
-  <div class="legend-item">
-    <h5>Energy axis</h5>
-    <p>Is the mood loud like a scream or quiet like a whisper? Dynamic = high. Peaceful = low.</p>
-  </div>
-  <div class="legend-item">
-    <h5>Visibility axis</h5>
-    <p>Does the mood reveal or conceal? Bleak shows everything. Ominous hides it. Certain = visible. Uncertain = obscured.</p>
-  </div>
-  <div class="legend-item">
-    <h5>All three must align</h5>
-    <p>One misaligned aspect undermines the whole. Lighting, Color, and Composition must reinforce the same mood.</p>
-  </div>
-</div>
+  <!-- LIGHTING -->
+  <section id="lighting">
+    <div class="section-label">§ 03 — Aspect I</div>
+    <h2>Lighting</h2>
+    <p>Three principles govern how lighting creates mood. Keep direction, intensity, and color consistent throughout a scene.</p>
 
-
-<!-- ══════════════════ POSITIVE ══════════════════ -->
-<div class="section-header pos">
-  <div class="dot"></div>
-  <h2>Positive Moods</h2>
-  <div class="line"></div>
-</div>
-
-<div class="grid" id="positive-grid"></div>
-
-<!-- ══════════════════ NEUTRAL ══════════════════ -->
-<div class="section-header neu">
-  <div class="dot"></div>
-  <h2>Neutral Moods</h2>
-  <div class="line"></div>
-</div>
-
-<div class="grid" id="neutral-grid"></div>
-
-<!-- ══════════════════ NEGATIVE ══════════════════ -->
-<div class="section-header neg">
-  <div class="dot"></div>
-  <h2>Negative Moods</h2>
-  <div class="line"></div>
-</div>
-
-<div class="grid" id="negative-grid"></div>
-
-<footer>Understanding Mood · Clint Cearley / Swatches · Compiled reference guide</footer>
-
-<script>
-const MOODS = [
-  // ── POSITIVE ──
-  {
-    id: 'cheerful', group: 'pos', name: 'Cheerful',
-    tagline: 'Well-lit · High energy · Certain',
-    emotion: 100, energy: 85, visibility: 90,
-    lighting: 'Maximum light everywhere. Fill shadows so nothing is lost to black. No high-contrast shadow areas — the light is intense but soft. Add bounce and fill liberally. Everything visible, including expressions and corners.',
-    lightingKey: 'Well-lit',
-    color: 'Yellow, orange, green, lime, magenta. High saturation throughout, including in shadows (shift color, don\'t just add black). Triadic or analogous warm schemes. Avoid grey — it drains the energy.',
-    colorTags: ['Yellow', 'Orange', 'Lime', 'Magenta', 'Green'],
-    composition: 'Active designs — spiral or radiating lines over static triangle. Camera at eye-level or lower to keep the world looking big. Curve-based patterns that evoke a flower budding.',
-    compRules: ['Spirals or radiating patterns', 'Eye-level or lower camera', 'Curved lines and shapes', 'Symmetry optional — activity required'],
-  },
-  {
-    id: 'peaceful', group: 'pos', name: 'Peaceful',
-    tagline: 'Diffused · Low energy · Certain',
-    emotion: 80, energy: 15, visibility: 85,
-    lighting: 'Soft, indirect, diffused light. Think overcast sky or well-lit shade — almost no cast shadows. Direct light brings unwanted energy. Fill everything evenly. The scene should feel safe with nothing hidden.',
-    lightingKey: 'Diffused',
-    color: 'Blues, greens, lavender. Natural colors only. Avoid vivid magenta or pure lime — too energetic. Analogous harmony scheme. Subdued saturation, warm sunrise tones are acceptable.',
-    colorTags: ['Blue', 'Green', 'Lavender', 'Soft warmth', 'No pure lime'],
-    composition: 'Centered symmetrical layout. Horizontal lines over diagonals. Level camera. Triangular, circular, or spiral patterns. Rounded and curved shapes throughout. No tilted frames.',
-    compRules: ['Horizontals over diagonals', 'Level camera — never tilted', 'Centered symmetrical layout', 'Curved/rounded shapes', 'Triangular or circular guide'],
-  },
-  {
-    id: 'dynamic', group: 'pos', name: 'Dynamic',
-    tagline: 'Contrast · High energy · Certain',
-    emotion: 90, energy: 95, visibility: 75,
-    lighting: 'High contrast is the key. Bright lit areas, dark shadow areas, light-against-dark pattern throughout. Multiple opposing light sources with different directions, colors, and intensities create tension.',
-    lightingKey: 'Contrast',
-    color: 'Complementary scheme to create visual tension. Red, orange, yellow for energy. Strong contrast between warms and cools. White for high-energy impact. Avoid grey — it kills momentum.',
-    colorTags: ['Red', 'Orange', 'Yellow', 'Complementary pairs', 'High contrast'],
-    composition: 'Choose diagonals over plumb verticals and horizontals. Asymmetrical designs. Radiating pattern adds tension. Match canvas orientation to the angle of action. Active lines dominate.',
-    compRules: ['Diagonals everywhere', 'Asymmetrical balance', 'Radiating patterns', 'Match orientation to action direction', 'Multiple light-against-dark shapes'],
-  },
-  {
-    id: 'magical', group: 'pos', name: 'Magical',
-    tagline: 'Unusual sources · Medium energy · Uncertain',
-    emotion: 85, energy: 60, visibility: 50,
-    lighting: 'More shadows than other positive moods but focal points stay lit — otherwise it slips into Ominous. Use unusual light sources: glowing eyes, magic motes, glowing objects, stars, underlight. Direction matters.',
-    lightingKey: 'Unusual',
-    color: 'Violet, cyan, lavender, magenta. These carry mystical/meta-physical connotations. Keep most colors at medium saturation with pops of magic color in spells, eyes, and runes. Harmonious or contrasting — avoid colorful.',
-    colorTags: ['Violet', 'Cyan', 'Lavender', 'Magenta', 'Medium saturation'],
-    composition: 'Spiral or curved patterns. Base on curved letters (G, S, 9, 6). Avoid close-ups — they feel restrictive and threatening. Use curves for layout. Open flow through the image.',
-    compRules: ['Spiral or flowing curve pattern', 'Curved letters: G, S, 9, 6', 'No tight close-ups', 'Curves over straight lines', 'Allow visual flow'],
-  },
-  {
-    id: 'epic', group: 'pos', name: 'Epic',
-    tagline: 'Wide · High energy · Certain',
-    emotion: 95, energy: 80, visibility: 95,
-    lighting: 'Wide, grand illumination. The world should feel enormous and lit. Dramatic but not dark — backlighting heroes to make them stand out against a vast environment. Scale through light.',
-    lightingKey: 'Grand scale',
-    color: 'Gold, warm orange, blue sky — colors of grandeur and scale. Complementary warm/cool contrast between foreground and background. Saturated and impactful.',
-    colorTags: ['Gold', 'Warm orange', 'Blue sky', 'Complementary warmth/cool'],
-    composition: 'Wide view with lots of depth. Build layers foreground to background. Level camera, play up verticals. Symmetrical and centered layouts common. Radiating design pattern. Unbroken or mostly open line of sight.',
-    compRules: ['Wide shot — extreme wide preferred', 'Deep layered content', 'Level camera', 'Vertical emphasis', 'Centered or symmetrical', 'Radiating pattern', 'Open line of sight'],
-  },
-
-  // ── NEUTRAL ──
-  {
-    id: 'noir', group: 'neu', name: 'Noir',
-    tagline: 'Graphical · Medium energy · Uncertain',
-    emotion: 50, energy: 55, visibility: 50,
-    lighting: 'Artful use of light and shadow — make graphical shapes from them. Striped light across a character. Long cast shadows. Silhouettes. Some major elements lit, others obscured. Think vintage mystery or future-noir.',
-    lightingKey: 'Graphical',
-    color: 'Achromatic or monochromatic base with one discordant accent. Deep blue-blacks for night. Occasional warm amber accent. Straight-line patterns over curved. Think Blade Runner.',
-    colorTags: ['Deep black', 'Cool blues', 'Amber accent', 'Achromatic base', 'Discordant pop'],
-    composition: 'Asymmetrical — rule of Thirds is common. Varying camera heights, especially lower angles. Darkness conceals corners. Straight-line patterns. Deep contrast in value arrangement.',
-    compRules: ['Rule of Thirds layout', 'Low camera angles', 'Dark corners', 'Straight line patterns', 'Asymmetrical balance'],
-  },
-  {
-    id: 'mysterious', group: 'neu', name: 'Mysterious',
-    tagline: 'Unknown · Low-medium energy · Uncertain',
-    emotion: 50, energy: 40, visibility: 35,
-    lighting: 'Mix of lit and shadowed areas. Crucial: not everything the viewer wants to see is visible. The unknown element is neither good nor bad — a balancing act. Guide attention to focal points carefully.',
-    lightingKey: 'Unknown',
-    color: 'Black (for concealment). Muted and desaturated palette. One or two off notes — use only a few unusual aspects at a time. Too many negative signals shift it into overtly negative.',
-    colorTags: ['Black', 'Desaturated palette', 'Muted tones', '1–2 unusual accents only'],
-    composition: 'Tilted camera angle. Asymmetrical balance. Show the scene from corners rather than front-on. Use only one or two "off" aspects — overuse tips into Horror.',
-    compRules: ['Tilted camera (Dutch Angle)', 'Asymmetrical balance', 'View from corners', 'Limit unusual choices to 1–2', 'Partial concealment of key elements'],
-  },
-  {
-    id: 'surreal', group: 'neu', name: 'Surreal',
-    tagline: 'Dreamlike · Variable energy · Uncertain',
-    emotion: 50, energy: 50, visibility: 40,
-    lighting: 'Impossible or contradictory light sources. Multiple directional lights that shouldn\'t coexist. Light that doesn\'t follow physical rules. The wrongness of the light is the signal.',
-    lightingKey: 'Impossible',
-    color: 'Unusual combinations that feel dreamlike. Lavender as a light source. Colors that don\'t belong. Context is everything — a familiar palette in unfamiliar proportions creates unease.',
-    colorTags: ['Lavender light', 'Impossible hues', 'Unexpected combinations', 'Dreamlike palette'],
-    composition: 'Break conventional rules deliberately. Objects at wrong scales. Compositions that resist normal reading. Familiar guides used wrongly create productive disorientation.',
-    compRules: ['Break scale expectations', 'Contradict normal depth cues', 'Use familiar forms in wrong contexts', 'Comfortable + wrong = surreal'],
-  },
-  {
-    id: 'dramatic', group: 'neu', name: 'Dramatic',
-    tagline: 'Shapes · Medium energy · Certain',
-    emotion: 50, energy: 65, visibility: 70,
-    lighting: 'Strong light and shadow but simplified into distinct larger shapes. A single light source is common — multiple sources create smaller, fragmented shapes that feel more Dynamic than Dramatic. Bold value separation.',
-    lightingKey: 'Shapes',
-    color: 'Complementary tension or split-complementary. Strong contrast. Deep rich shadows. Often a warm key against a cool fill. The color amplifies the structural tension in the values.',
-    colorTags: ['Warm key / cool fill', 'Complementary tension', 'Rich shadows', 'Bold value contrast'],
-    composition: 'Diagonals are good but centered compositions are more common than in Dynamic. Can use short depth — focus on a single element. Fewer compositional elements than Dynamic.',
-    compRules: ['Single dominant light', 'Large simplified shadow shapes', 'Diagonals or centered', 'Short depth acceptable', 'Fewer elements, more weight'],
-  },
-  {
-    id: 'cool', group: 'neu', name: 'Cool',
-    tagline: 'Showcase · Low energy · Certain',
-    emotion: 50, energy: 30, visibility: 85,
-    lighting: 'Clean, flattering, near eye-level. The mood is about showing off the design. Over-elaborate lighting detracts from the subject. Simple and respectful of the form.',
-    lightingKey: 'Showcase',
-    color: 'Let the subject\'s design colors speak. Neutral environment. Don\'t compete with the subject. Slate, muted blues, desaturated backgrounds support without stealing attention.',
-    colorTags: ['Subject-led palette', 'Slate', 'Muted background', 'Neutral environment'],
-    composition: 'Balanced, centered subject. Near eye-level camera height. Getting fancy with composition detracts. The subject IS the composition. Clean framing.',
-    compRules: ['Centered and balanced', 'Eye-level camera', 'Simple framing — don\'t over-design', 'Let the subject breathe', 'Composition supports, not competes'],
-  },
-
-  // ── NEGATIVE ──
-  {
-    id: 'bleak', group: 'neg', name: 'Bleak',
-    tagline: 'Wide visible · Low energy · Certain',
-    emotion: 10, energy: 20, visibility: 90,
-    lighting: 'Negative version of Peaceful. Less light than Peaceful, some elements drift into shadow, but the overall view is wide and exposed — the point is you CAN see everything, and everything is hopeless.',
-    lightingKey: 'Diffuse & cold',
-    color: 'Grey, black, subdued desaturated palette. No warm or hopeful colors. Limit saturation below 40%. Achromatic or nearly so. Remove all vibrancy.',
-    colorTags: ['Grey', 'Black', 'Desaturated', 'No warmth', 'No vibrancy'],
-    composition: 'Wide view with full depth — all options visible and all are bad. Straight lines over curves (curves imply growth/flow). No hope of escape, no inviting path. Horizontal emphasis.',
-    compRules: ['Wide view, full depth', 'Straight lines only', 'No curves — curves suggest growth', 'Horizontal emphasis', 'No inviting focal direction'],
-  },
-  {
-    id: 'ominous', group: 'neg', name: 'Ominous',
-    tagline: 'Passive threat · Low-medium energy · Uncertain',
-    emotion: 15, energy: 40, visibility: 25,
-    lighting: 'Conceal tops of towers, room corners, people\'s eyes. Danger is passive — like a rustling in the dark. Low angles on threatening elements. Down-views on characters to make them feel small. Vignetting.',
-    lightingKey: 'Obscured',
-    color: 'Black, violet, green. These carry negative and unknown connotations. Heavy use of pure black shadow. Remove chroma from shadows. Let darkness be absolute.',
-    colorTags: ['Black', 'Violet', 'Green', 'Absolute shadows', 'No chroma in dark areas'],
-    composition: 'Low camera angles on threats — they loom. Down-view on characters — they shrink. Tilted camera. Dark corners. Short depth of field. The viewer can\'t see what\'s nearby.',
-    compRules: ['Low angle on threats', 'Down-view on characters', 'Tilted camera', 'Conceal corners and edges', 'Short sight lines'],
-  },
-  {
-    id: 'horror', group: 'neg', name: 'Horror',
-    tagline: 'Unnatural · High energy · Uncertain',
-    emotion: 5, energy: 75, visibility: 20,
-    lighting: 'Like Ominous but the light source itself is unnatural — underlit faces, light from below, impossible angles. Obscure focal points in darkness. Make use of silhouettes. Light disturbing or wrong things.',
-    lightingKey: 'Unnatural angle',
-    color: 'Black, red, deep violet. Absolute shadows. Only illuminate what is wrong or disturbing. Color is used sparingly and deliberately to signal danger.',
-    colorTags: ['Black', 'Red', 'Deep violet', 'Minimal color', 'Illuminate only the wrong things'],
-    composition: 'Tilted close camera. Short depth — can\'t see what\'s nearby. Asymmetry makes things feel off-kilter. Tight crop gives characters nowhere to go. Blocked line of sight.',
-    compRules: ['Tilted close camera', 'Short depth', 'Asymmetry throughout', 'Tight crop — no breathing room', 'Blocked line of sight', 'Underlit or side-lit faces'],
-  },
-  {
-    id: 'gritty', group: 'neg', name: 'Gritty',
-    tagline: 'Unflattering · Medium energy · Certain',
-    emotion: 20, energy: 55, visibility: 75,
-    lighting: 'Unlike dramatic beauty lighting — light is parallel to the object plane, raking along the surface to bring out texture, wrinkles, damage, and wear. Not constructed to flatter. Lived-in and harsh.',
-    lightingKey: 'Raking/Unflattering',
-    color: 'Terra cotta, brown, olive, muted red. Desaturated and dirty. No pure bright hues — add grime to everything. Post-apocalyptic palette: grey, black, warm earth tones.',
-    colorTags: ['Terra cotta', 'Brown', 'Olive', 'Muted red', 'Desaturated'],
-    composition: 'Mid shots and close shots that show texture and wear. Asymmetrical. The environment should feel confining and lived-in. No grand wide epic shots.',
-    compRules: ['Mid to close shots', 'Show texture and damage', 'Asymmetrical layout', 'No grand vistas', 'Tight and confining framing'],
-  },
-  {
-    id: 'oppressive', group: 'neg', name: 'Oppressive',
-    tagline: 'Crushing · Low energy · Certain',
-    emotion: 5, energy: 25, visibility: 80,
-    lighting: 'Heavy top-down lighting that crushes and flattens. Or vast underexposed environments that dwarf the character. The character is always smaller than the forces around them.',
-    lightingKey: 'Crushing/Vast',
-    color: 'Heavy desaturated palette. Industrial greys, cold blues, bleak browns. Colors that evoke institutional weight. No warmth. No escape in the palette.',
-    colorTags: ['Industrial grey', 'Cold blue', 'Bleak brown', 'No warmth', 'Heavy desaturation'],
-    composition: 'Looking down on characters constantly. Architecture and environment towers over them. Symmetrical but oppressive — like a corridor. Heavy visual weight on top.',
-    compRules: ['Camera always above characters', 'Environment dominates over figures', 'Symmetry used for institutional weight', 'Heavy visual elements on top', 'Characters small against surroundings'],
-  },
-];
-
-function buildMetricBar(label, value, pct) {
-  return `
-    <div class="metric-row">
-      <span class="metric-label">${label}</span>
-      <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
-      <span class="metric-val">${value}</span>
-    </div>`;
-}
-
-function emotionLabel(v) {
-  if (v >= 75) return 'Positive';
-  if (v >= 40) return 'Neutral';
-  return 'Negative';
-}
-
-function energyLabel(v) {
-  if (v >= 70) return 'High';
-  if (v >= 40) return 'Medium';
-  return 'Low';
-}
-
-function visibilityLabel(v) {
-  if (v >= 70) return 'Certain';
-  if (v >= 40) return 'Mixed';
-  return 'Uncertain';
-}
-
-function buildCard(mood) {
-  const tags = mood.colorTags.map(t => `<span class="tag">${t}</span>`).join('');
-  const rules = mood.compRules.map(r => `<li>${r}</li>`).join('');
-
-  return `
-  <div class="card ${mood.group}" id="card-${mood.id}" onclick="toggleCard('${mood.id}')">
-    <div class="card-header">
-      <div class="card-top">
+    <div class="principle-list">
+      <div class="principle-item">
+        <div class="principle-num">1</div>
         <div>
-          <div class="mood-name">${mood.name}</div>
-          <div class="card-tagline">${mood.tagline}</div>
+          <div class="principle-title">Light Reveals / Darkness Conceals</div>
+          <p style="margin:0;font-size:12px;color:#3a3020">Light = safety, positivity. Dark = threat, negativity. Positive scenes: bright, filled shadows — nothing lost to black. Negative scenes: remove fill lights, let eyes and corners disappear into shadow. Silhouettes dominate.</p>
         </div>
-        <div class="expand-icon">
-          <svg viewBox="0 0 12 12"><line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/></svg>
+      </div>
+      <div class="principle-item">
+        <div class="principle-num">2</div>
+        <div>
+          <div class="principle-title">Light Gives Significance</div>
+          <p style="margin:0;font-size:12px;color:#3a3020">Whatever you light, you tell the viewer is important. Use vignetting to focus attention. If a narrative element matters, illuminate it. If it shouldn't be found, leave it dark.</p>
+        </div>
+      </div>
+      <div class="principle-item">
+        <div class="principle-num">3</div>
+        <div>
+          <div class="principle-title">Lighting Reflects Character's State</div>
+          <p style="margin:0;font-size:12px;color:#3a3020">Shadow over a face = internal darkness or deception. Split warm/cool lighting = internal conflict. Spotlight on a character = courage, hope, importance.</p>
         </div>
       </div>
     </div>
 
-    <div class="metrics">
-      ${buildMetricBar('Emotion', emotionLabel(mood.emotion), mood.emotion)}
-      ${buildMetricBar('Energy', energyLabel(mood.energy), mood.energy)}
-      ${buildMetricBar('Visibility', visibilityLabel(mood.visibility), mood.visibility)}
+    <h3>Mood-Specific Lighting</h3>
+    <table class="data-table">
+      <thead><tr><th>Mood</th><th>Lighting Key</th></tr></thead>
+      <tbody>
+        <tr><td>Cheerful</td><td>Well-lit; minimal shadows; soft fill everywhere</td></tr>
+        <tr><td>Peaceful</td><td>Diffused/indirect; almost no cast shadows</td></tr>
+        <tr><td>Dynamic</td><td>High contrast; multiple opposing light sources</td></tr>
+        <tr><td>Magical</td><td>Unusual sources (glowing eyes, motes); some shadow but focal points lit</td></tr>
+        <tr><td>Dramatic</td><td>Single strong light; simplified large shadow shapes</td></tr>
+        <tr><td>Noir</td><td>Graphical shapes from light/shadow; long cast shadows; silhouettes</td></tr>
+        <tr><td>Mysterious</td><td>Mix of lit and hidden; "unknown" must exist</td></tr>
+        <tr><td>Ominous</td><td>Obscure tops of towers, corners, eyes; silhouettes</td></tr>
+        <tr><td>Horror</td><td>Unnatural angle (underlight); obscure focal points</td></tr>
+        <tr><td>Gritty</td><td>Unflattering light; raking parallel to surface; texture-revealing</td></tr>
+        <tr><td>Bleak</td><td>Some light, but elements drift into shadow; diffuse, not warm</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="ornament">— ✦ —</div>
+
+  <!-- COLOR -->
+  <section id="color">
+    <div class="section-label">§ 04 — Aspect II</div>
+    <h2>Color</h2>
+    <p>Colors shift appearance based on surroundings. The <em>relationship</em> of colors matters more than specific colors. You can paint skin any hue — the surrounding environment makes it read correctly.</p>
+
+    <h3>Color Profiles</h3>
+    <div class="color-grid">
+      <div class="color-swatch" style="background:#f5f0e8"><div class="swatch-dot" style="background:#1a1610"></div><div class="swatch-name">Black</div><div class="swatch-desc">Strong, unknown, classy, negativity</div></div>
+      <div class="color-swatch" style="background:#f0ece4"><div class="swatch-dot" style="background:#888"></div><div class="swatch-name">Grey</div><div class="swatch-desc">Neutral, lifeless, melancholy</div></div>
+      <div class="color-swatch" style="background:#f5f0e8"><div class="swatch-dot" style="background:#f0ede8; border-color:#ccc"></div><div class="swatch-name">White</div><div class="swatch-desc">Pure, innocent, hope, clinical</div></div>
+      <div class="color-swatch" style="background:#fffbe0"><div class="swatch-dot" style="background:#f5d020"></div><div class="swatch-name">Yellow</div><div class="swatch-desc">Optimism, clarity, youth, naivety</div></div>
+      <div class="color-swatch" style="background:#fef5d6"><div class="swatch-dot" style="background:#c4922a"></div><div class="swatch-name">Gold</div><div class="swatch-desc">Wealth, status, opulence</div></div>
+      <div class="color-swatch" style="background:#fff0e0"><div class="swatch-dot" style="background:#e87830"></div><div class="swatch-name">Orange</div><div class="swatch-desc">Friendly, cheerful, youthful, hot</div></div>
+      <div class="color-swatch" style="background:#ffe8e8"><div class="swatch-dot" style="background:#d63030"></div><div class="swatch-name">Red</div><div class="swatch-desc">Excitement, passion, danger, violence</div></div>
+      <div class="color-swatch" style="background:#fde8f4"><div class="swatch-dot" style="background:#cc2090"></div><div class="swatch-name">Magenta</div><div class="swatch-desc">Energetic, modern, spiritual</div></div>
+      <div class="color-swatch" style="background:#fde8f0"><div class="swatch-dot" style="background:#f090b0"></div><div class="swatch-name">Pink</div><div class="swatch-desc">Feminine, innocent, childlike, love</div></div>
+      <div class="color-swatch" style="background:#f4eeff"><div class="swatch-dot" style="background:#c0a0e0"></div><div class="swatch-name">Lavender</div><div class="swatch-desc">Creative, mystical, fantasy</div></div>
+      <div class="color-swatch" style="background:#eeebff"><div class="swatch-dot" style="background:#7050b0"></div><div class="swatch-name">Violet</div><div class="swatch-desc">Royalty, refined, injury</div></div>
+      <div class="color-swatch" style="background:#e8ecf8"><div class="swatch-dot" style="background:#1a3a70"></div><div class="swatch-name">Navy</div><div class="swatch-desc">Trust, dependable, secure, night</div></div>
+      <div class="color-swatch" style="background:#e8f0fc"><div class="swatch-dot" style="background:#3070d0"></div><div class="swatch-name">Blue</div><div class="swatch-desc">Calm, trustworthy, cold, water</div></div>
+      <div class="color-swatch" style="background:#e4f8fb"><div class="swatch-dot" style="background:#20b0c8"></div><div class="swatch-name">Cyan</div><div class="swatch-desc">Cerebral, magical, futuristic</div></div>
+      <div class="color-swatch" style="background:#eafaea"><div class="swatch-dot" style="background:#30a040"></div><div class="swatch-name">Green</div><div class="swatch-desc">Nature, growth, health, corruption</div></div>
+      <div class="color-swatch" style="background:#f4ffe0"><div class="swatch-dot" style="background:#90d000"></div><div class="swatch-name">Lime</div><div class="swatch-desc">Vibrant, toxic, radioactive</div></div>
+      <div class="color-swatch" style="background:#f5ede0"><div class="swatch-dot" style="background:#8c6020"></div><div class="swatch-name">Brown</div><div class="swatch-desc">Earthy, humble, rustic</div></div>
     </div>
 
-    <div class="card-body">
-      <div class="card-body-inner">
-        <div class="card-sections">
-
-          <div class="info-section">
-            <h4>⬡ Lighting · "${mood.lightingKey}"</h4>
-            <p>${mood.lighting}</p>
-          </div>
-
-          <div class="info-section">
-            <h4>◈ Color</h4>
-            <p>${mood.color}</p>
-            <div class="tag-list" style="margin-top:10px">${tags}</div>
-          </div>
-
-          <div class="info-section">
-            <h4>◻ Composition</h4>
-            <p>${mood.composition}</p>
-            <ul class="rule-list" style="margin-top:10px">${rules}</ul>
-          </div>
-
-        </div>
+    <h3>Color Schemes</h3>
+    <div class="scheme-grid">
+      <div class="scheme-card">
+        <div class="scheme-name">Monochromatic</div>
+        <div class="scheme-quality">Unity · Pervasive · Idyllic</div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-name">Analogous</div>
+        <div class="scheme-quality">Harmony · Classical · Mood-specific</div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-name">Complementary</div>
+        <div class="scheme-quality">Tension · Conflict · Opposition</div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-name">Split-Complementary</div>
+        <div class="scheme-quality">Tension + Balance</div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-name">Triadic</div>
+        <div class="scheme-quality">Colorful · Balanced · Superhero</div>
+      </div>
+      <div class="scheme-card">
+        <div class="scheme-name">Discordant</div>
+        <div class="scheme-quality">Stark · Dramatic — one accent breaks the scheme</div>
       </div>
     </div>
-  </div>`;
-}
 
-function toggleCard(id) {
-  const el = document.getElementById('card-' + id);
-  el.classList.toggle('open');
-}
+    <h3>Palette Reference</h3>
+    <table class="data-table">
+      <thead><tr><th>Palette</th><th>Character</th></tr></thead>
+      <tbody>
+        <tr><td>Peaceful</td><td>Blues, greens, lavender. Avoids vivid lime/magenta.</td></tr>
+        <tr><td>Earthy</td><td>Browns, warm greens, muted reds.</td></tr>
+        <tr><td>Subdued</td><td>Limit saturation to ~40%. Best for Bleak, depressed, serene.</td></tr>
+        <tr><td>Mystical</td><td>Medium saturation with pops of magic color in spells/eyes.</td></tr>
+        <tr><td>Cold</td><td>Blues, turquoise, white, black.</td></tr>
+        <tr><td>Warm</td><td>Yellow, orange, terra cotta, red-violet. More energetic.</td></tr>
+      </tbody>
+    </table>
+  </section>
 
-// Render
-const positive = MOODS.filter(m => m.group === 'pos');
-const neutral  = MOODS.filter(m => m.group === 'neu');
-const negative = MOODS.filter(m => m.group === 'neg');
+  <div class="ornament">— ✦ —</div>
 
-document.getElementById('positive-grid').innerHTML = positive.map(buildCard).join('');
-document.getElementById('neutral-grid').innerHTML  = neutral.map(buildCard).join('');
-document.getElementById('negative-grid').innerHTML = negative.map(buildCard).join('');
-</script>
+  <!-- COMPOSITION -->
+  <section id="composition">
+    <div class="section-label">§ 05 — Aspect III</div>
+    <h2>Composition</h2>
+    <p>Composition is the context for everything else — not a thing in itself, but how all things relate. It affects mood through balance, energy, and space.</p>
+
+    <h3>Static vs. Active Energy</h3>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="comp-title">Static — Low Energy</div>
+        <p>Flat lines, plumb verticals, centered symmetry. Conveys: Peaceful, Bleak, orderly.</p>
+      </div>
+      <div class="comp-card">
+        <div class="comp-title">Active — High Energy</div>
+        <p>Diagonals, asymmetry, curves, spirals. Conveys: Dynamic, Adventure, Horror.</p>
+      </div>
+      <div class="comp-card">
+        <div class="comp-title">Open Line of Sight</div>
+        <p>Adventurous, epic. Gives subject room to breathe and move.</p>
+      </div>
+      <div class="comp-card">
+        <div class="comp-title">Blocked / Tight Crop</div>
+        <p>Horror, claustrophobic. Traps the character; generates dread.</p>
+      </div>
+    </div>
+
+    <h3>Viewpoint</h3>
+    <table class="data-table">
+      <thead><tr><th>Viewpoint</th><th>What it conveys</th></tr></thead>
+      <tbody>
+        <tr><td>1st Person</td><td>Visceral, personal</td></tr>
+        <tr><td>3rd Person</td><td>Distant, contextual</td></tr>
+        <tr><td>Looking Up</td><td>Subject appears powerful, intimidating</td></tr>
+        <tr><td>Looking Down</td><td>Subject appears inferior, small</td></tr>
+        <tr><td>Dutch Angle</td><td>Wrongness, mystery, motion, something amiss</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Shot Distance</h3>
+    <div class="shot-list">
+      <div class="shot-item"><div class="shot-label">Extreme Close Up</div><div class="shot-desc">Pure emotion — eyes only</div></div>
+      <div class="shot-item"><div class="shot-label">Close Up</div><div class="shot-desc">Thought/emotion; minimal environment</div></div>
+      <div class="shot-item"><div class="shot-label">Medium Close Up</div><div class="shot-desc">Expression + some background</div></div>
+      <div class="shot-item"><div class="shot-label">Mid Shot</div><div class="shot-desc">Action; character prominent</div></div>
+      <div class="shot-item"><div class="shot-label">Wide Shot</div><div class="shot-desc">Establishing; impersonal</div></div>
+      <div class="shot-item"><div class="shot-label">Extreme Wide</div><div class="shot-desc">Environment dominant; character minimal</div></div>
+    </div>
+
+    <h3>Mood Profiles</h3>
+    <table class="data-table">
+      <thead><tr><th>Mood</th><th>Composition Guide</th></tr></thead>
+      <tbody>
+        <tr><td>Peaceful</td><td>Horizontals, level camera, symmetrical, triangular/circular pattern</td></tr>
+        <tr><td>Bleak</td><td>Wide view, full depth, straight lines over curves</td></tr>
+        <tr><td>Horror</td><td>Tilted close camera, short depth, asymmetry</td></tr>
+        <tr><td>Mysterious</td><td>Tilted camera, asymmetrical, view from corners, 1–2 off elements</td></tr>
+        <tr><td>Epic</td><td>Wide view, deep layers, level camera, vertical emphasis, radiating pattern</td></tr>
+        <tr><td>Ominous</td><td>Low camera on threats, down view on character, dark corners</td></tr>
+        <tr><td>Dynamic</td><td>Diagonals, asymmetry, radiating pattern, match orientation to action</td></tr>
+        <tr><td>Magical</td><td>Spiral/curve pattern (G, S, 9, 6), no tight close-ups, curves over lines</td></tr>
+        <tr><td>Noir</td><td>Thirds layout, varying camera heights, straight-line patterns</td></tr>
+        <tr><td>Cheerful</td><td>Active designs (spiral/radiating), eye-level or lower camera, curves</td></tr>
+        <tr><td>Adventure</td><td>Wide, deep, mostly unbroken line of sight, diagonals for energy</td></tr>
+        <tr><td>Cool</td><td>Balanced, centered, near eye-level camera</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Eye Magnets — Natural Focal Points</h3>
+    <p style="font-size:12px;color:#3a3020">High contrast · Bright/vibrant color · Lit elements · Faces &amp; eyes · Negative space · Center of image · Unique elements · Pattern crux · Hard edges among soft ones · Text · Target shapes</p>
+  </section>
+
+  <div class="ornament">— ✦ —</div>
+
+  <!-- KEY PRINCIPLES -->
+  <section id="principles">
+    <div class="section-label">§ 06</div>
+    <h2>Key Principles</h2>
+
+    <div class="principle-rules">
+      <div class="rule-item"><strong>Align all aspects</strong>Lighting, Color, and Composition must reinforce the same mood. One misaligned aspect undermines the whole.</div>
+      <div class="rule-item"><strong>Intentionality over autopilot</strong>Know what the image is about before you start. The mood comes first.</div>
+      <div class="rule-item"><strong>Metrics first</strong>Map the mood to Emotion / Energy / Visibility before making any visual decisions.</div>
+      <div class="rule-item"><strong>Composition is context</strong>It's not a thing in itself — it's how everything relates.</div>
+      <div class="rule-item"><strong>Not all images need a mood</strong>Character design sheets prioritize clarity. Concept art prioritizes mood over detail.</div>
+    </div>
+  </section>
+
+</main>
+
 </body>
 </html>
